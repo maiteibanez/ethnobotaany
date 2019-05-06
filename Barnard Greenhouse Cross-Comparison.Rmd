@@ -69,17 +69,18 @@ map('world', fill=T, col="grey", bg="light blue", xlim=c(-145,-30), ylim=c(-65,7
 map('world', fill=T, col="grey", bg="light blue", xlim=c(-145,-30), ylim=c(-65,78))
   plot(P_guajava_rangemap, col="pink", add=T)
 ```
-
+points(cbind(A_comosus$longitude, A_comosus$latitude), col="orange", pch=20, cex=.8)
+points(cbind(Z_officinalis$longitude, Z_officinalis$latitude), col="white", pch=20, cex=.8)
 
 ```{r}
 map('world', fill=T, col="grey", bg="light blue", xlim=c(-145,-35),ylim=c(-55,78))
 points(cbind(R_officinalis$longitude, R_officinalis$latitude), col="red", pch=20, cex=.8)
 points(cbind(P_rubra$longitude, P_rubra$latitude), col="blue", pch=20, cex=.8)
-points(cbind(A_comosus$longitude, A_comosus$latitude), col="orange", pch=20, cex=.8)
+
 points(cbind(M_pudica$longitude, M_pudica$latitude), col="purple", pch=20, cex=.8)
 points(cbind(C_roseus$longitude, C_roseus$latitude), col="yellow", pch=20, cex=.8)
 points(cbind(R_communis$longitude, R_communis$latitude), col="black", pch=20, cex=.8)
-points(cbind(Z_officinalis$longitude, Z_officinalis$latitude), col="white", pch=20, cex=.8)
+
 points(cbind(P_americana$longitude, P_americana$latitude), col="green", pch=20, cex=.8)
 points(cbind(P_guajava$longitude, P_guajava$latitude), col="pink", pch=20, cex=.8)
 ```
