@@ -1,0 +1,84 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(BIEN)
+library(maps) 
+library(sp)
+library(raster) 
+vignette("BIEN")
+```
+
+```{r}
+A_racemosa <- BIEN_occurrence_species(species = "Actaea racemosa")
+M_canadense <- BIEN_occurrence_species(species = "Menispermum canadense")
+V_prunifolium <- BIEN_occurrence_species(species = "Viburnum prunifolium")
+
+A_racemosa_rangemap <- BIEN_ranges_load_species("Actaea racemosa")
+M_canadense_rangemap <- BIEN_ranges_load_species("Menispermum canadense")
+V_prunifolium_rangemap <- BIEN_ranges_load_species("Viburnum prunifolium")
+```
+
+```{r}
+# Both can be mapped, for example: 
+map('world', fill=T, col="grey", bg="light blue", xlim=c(-145,-50), ylim=c(12,78))
+  plot(M_canadense_rangemap, col="green", add=T)
+```
+
+```{r}
+# Map another Jungia species
+map('world', fill=T, col="grey", bg="light blue", xlim=c(-145,-50),ylim=c(12,78))
+plot(V_prunifolium_rangemap, col="red", add=T)
+```
+
+```{r}
+# And a third Jungia
+map('world', fill=T, col="grey", bg="light blue", xlim=c(-145,-50),ylim=c(12,78))
+plot(A_racemosa_rangemap, col="green", add=T)
+```
+
+```{r}
+# Map occurence records for three species of Jungia
+map('world', fill=T, col="grey", bg="light blue", xlim=c(-145,-50),ylim=c(12,78))
+points(cbind(M_canadense$longitude, M_canadense$latitude), col="red", pch=20, cex=.8)
+points(cbind(A_racemosa$longitude, A_racemosa$latitude), col="blue", pch=20, cex=.8)
+points(cbind(V_prunifolium$longitude, V_prunifolium$latitude), col="green", pch=20, cex=.8)
+```
+
+```{r}
+all.worldclim <- raster::getData("worldclim", res = 10, var = "bio")
+all.worldalt <- raster::getData("worldclim", res = 10, var = "alt")
+plot(all.worldclim[["bio1"]])
+plot(all.worldclim[["bio12"]])
+plot(all.worldalt[["alt"]])
+```
+
+```{r}
+plot(all.worldclim[["bio1"]])
+points(V_prunifolium[,c("longitude", "latitude")], pch = 24, cex = 0.5)
+plot(all.worldclim[["bio12"]])
+points(V_prunifolium[,c("longitude", "latitude")], pch = 16, cex = 0.5, col = "green")
+plot(all.worldalt[["alt"]], xlim=c(-145,-50),ylim=c(12,78))
+points(V_prunifolium[,c("longitude", "latitude")], pch = 16, cex = 0.5, col = "green")
+points(A_racemosa[,c("longitude", "latitude")], pch = 16, cex = 0.5, col = "blue")
+points(M_canadense[,c("longitude", "latitude")], pch = 16, cex = 0.5, col = "red")
+```
+```{r}
+plot(all.worldclim[["bio1"]])
+points(A_racemosa[,c("longitude", "latitude")], pch = 24, cex = 0.5)
+plot(all.worldclim[["bio12"]])
+points(A_racemosa[,c("longitude", "latitude")], pch = 16, cex = 0.5, col = "blue")
+plot(all.worldalt[["alt"]], xlim=c(-145,-50),ylim=c(12,78))
+points(A_racemosa[,c("longitude", "latitude")], pch = 16, cex = 0.5, col = "blue")
+```
+```{r}
+plot(all.worldclim[["bio1"]])
+points(M_canadense[,c("longitude", "latitude")], pch = 24, cex = 0.5)
+plot(all.worldclim[["bio12"]])
+points(M_canadense[,c("longitude", "latitude")], pch = 16, cex = 0.5, col = "red")
+plot(all.worldalt[["alt"]], xlim=c(-145,-50),ylim=c(12,78))
+points(M_canadense[,c("longitude", "latitude")], pch = 16, cex = 0.5, col = "red")
+```
+

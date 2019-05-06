@@ -1,0 +1,86 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*. 
+
+```{r}
+library(BIEN)
+library(maps)
+library(sp) 
+library(raster) 
+vignette("BIEN")
+```
+
+```{r}
+R_officinalis <- BIEN_occurrence_species(species = "Rosmarinus officinalis")
+P_rubra <- BIEN_occurrence_species(species = "Plumeria rubra")
+M_pudica <- BIEN_occurrence_species(species = "Mimosa pudica")
+C_roseus <- BIEN_occurrence_species(species = "Catharanthus roseus")
+R_communis <- BIEN_occurrence_species(species = "Ricinus communis")
+P_americana <- BIEN_occurrence_species(species = "Persea americana")
+P_guajava <- BIEN_occurrence_species(species = "Psidium guajava")
+```
+
+```{r}
+R_officinalis_rangemap <- BIEN_ranges_load_species("Rosmarinus officinalis")
+P_rubra_rangemap <- BIEN_ranges_load_species("Plumeria rubra")
+M_pudica_rangemap <- BIEN_ranges_load_species("Mimosa pudica")
+C_roseus_rangemap <- BIEN_ranges_load_species("Catharanthus roseus")
+R_communis_rangemap <- BIEN_ranges_load_species("Ricinus communis")
+P_americana_rangemap <- BIEN_ranges_load_species("Persea americana")
+P_guajava_rangemap <- BIEN_ranges_load_species("Psidium guajava")
+```
+
+```{r}
+map('world', fill=T, col="grey", bg="light blue", xlim=c(-145,-20), ylim=c(-70,78))
+  plot(R_officinalis_rangemap, col="red", add=T)
+```
+
+```{r}
+map('world', fill=T, col="grey", bg="light blue", xlim=c(-145,-30), ylim=c(-70,78))
+  plot(P_rubra_rangemap, col="green", add=T)
+```
+
+```{r}
+map('world', fill=T, col="grey", bg="light blue", xlim=c(-145,-30), ylim=c(-65,78))
+  plot(M_pudica_rangemap, col="purple", add=T)
+```
+
+```{r}
+map('world', fill=T, col="grey", bg="light blue", xlim=c(-145,-30), ylim=c(-65,78))
+  plot(C_roseus_rangemap, col="yellow", add=T)
+```
+
+```{r}
+map('world', fill=T, col="grey", bg="light blue", xlim=c(-145,-30), ylim=c(-65,78))
+  plot(R_communis_rangemap, col="black", add=T)
+```
+
+```{r}
+map('world', fill=T, col="grey", bg="light blue", xlim=c(-145,-30), ylim=c(-65,78))
+  plot(P_americana_rangemap, col="green", add=T)
+```
+
+```{r}
+map('world', fill=T, col="grey", bg="light blue", xlim=c(-145,-30), ylim=c(-65,78))
+  plot(P_guajava_rangemap, col="pink", add=T)
+```
+
+
+```{r}
+map('world', fill=T, col="grey", bg="light blue", xlim=c(-145,-35),ylim=c(-55,78))
+points(cbind(R_officinalis$longitude, R_officinalis$latitude), col="red", pch=20, cex=.8)
+points(cbind(P_rubra$longitude, P_rubra$latitude), col="blue", pch=20, cex=.8)
+points(cbind(A_comosus$longitude, A_comosus$latitude), col="orange", pch=20, cex=.8)
+points(cbind(M_pudica$longitude, M_pudica$latitude), col="purple", pch=20, cex=.8)
+points(cbind(C_roseus$longitude, C_roseus$latitude), col="yellow", pch=20, cex=.8)
+points(cbind(R_communis$longitude, R_communis$latitude), col="black", pch=20, cex=.8)
+points(cbind(Z_officinalis$longitude, Z_officinalis$latitude), col="white", pch=20, cex=.8)
+points(cbind(P_americana$longitude, P_americana$latitude), col="green", pch=20, cex=.8)
+points(cbind(P_guajava$longitude, P_guajava$latitude), col="pink", pch=20, cex=.8)
+```
+
